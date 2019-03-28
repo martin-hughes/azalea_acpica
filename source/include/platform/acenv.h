@@ -343,6 +343,9 @@
 #elif defined(_AED_EFI) || defined(_GNU_EFI) || defined(_EDK2_EFI)
 #include "acefi.h"
 
+#elif defined(__AZALEA__)
+#include "acazalea.h"
+
 #else
 
 /* Unknown environment */
