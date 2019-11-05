@@ -195,7 +195,8 @@ typedef struct ae_debug_regions
 typedef struct init_file_entry
 {
     char                    *Name;
-    UINT64                  Value;
+    ACPI_OPERAND_OBJECT     *ObjDesc;
+
 } INIT_FILE_ENTRY;
 
 extern BOOLEAN              AcpiGbl_UseLocalFaultHandler;
@@ -287,6 +288,10 @@ void
 AeMiscellaneousTests (
     void);
 
+void
+AeLateTest (
+    void);
+
 /* aeregion */
 
 ACPI_STATUS
@@ -352,7 +357,7 @@ AeSetupConfiguration (
 ACPI_STATUS
 AeLookupInitFileEntry (
     char                    *Pathname,
-    UINT64                  *Value);
+    ACPI_OPERAND_OBJECT     **ObjDesc);
 
 /* aeexec */
 

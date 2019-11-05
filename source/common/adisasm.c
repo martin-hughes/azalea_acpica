@@ -579,7 +579,7 @@ AdDisassembleOneTable (
         if (AslGbl_MapfileFlag)
         {
             fprintf (stderr, "%14s %s - %u bytes\n",
-                AslGbl_Files[ASL_FILE_MAP_OUTPUT].ShortDescription,
+                AslGbl_FileDescs[ASL_FILE_MAP_OUTPUT].ShortDescription,
                 AslGbl_Files[ASL_FILE_MAP_OUTPUT].Filename,
                 FlGetFileSize (ASL_FILE_MAP_OUTPUT));
         }
@@ -746,7 +746,6 @@ AdDoExternalFileList (
             {
                 ExternalFileList = ExternalFileList->Next;
                 GlobalStatus = AE_TYPE;
-                Status = AE_OK;
                 continue;
             }
 
