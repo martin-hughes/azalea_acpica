@@ -16,8 +16,8 @@ def main_build_script(vars):
   lib_install_dir = os.path.join(sys_image_root, "apps", "developer", "acpica", "lib")
   header_install_dir = os.path.join(sys_image_root, "apps", "developer", "acpica", "include")
 
-  lib_env['CXXFLAGS'] = '-mno-red-zone -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -std=c++17 -U _LINUX -U __linux__ -D __AZALEA__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
-  lib_env['CFLAGS'] = '-mno-red-zone -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -U _LINUX -U __linux__ -D __AZALEA__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
+  lib_env['CXXFLAGS'] = '-funwind-tables -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -std=c++17 -U _LINUX -U __linux__ -D __AZALEA__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
+  lib_env['CFLAGS'] = '-funwind-tables -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -U _LINUX -U __linux__ -D __AZALEA__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
   lib_env.AppendENVPath('CPATH', '#/source/include')
   lib_env.AppendENVPath('CPATH', '#/source/compiler')
   lib_env.AppendENVPath('CPATH', kernel_include_dir)
