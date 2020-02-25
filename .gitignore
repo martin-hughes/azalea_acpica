@@ -148,3 +148,4 @@ source.zip
 *.pyc
 variables.cache
 output/
+.sconsign.dblite
