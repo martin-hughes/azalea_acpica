@@ -85,6 +85,8 @@ generate/msvc2017/*.y.h
 generate/msvc2017/*.y.c
 generate/msvc2017/*.y.output
 generate/msvc2017/.vs
+generate/msvc2017/*.y
+
 
 generate/msvc9/AcpiSrcLinuxDebug
 generate/msvc9/AcpiSubsystemLinux
@@ -124,8 +126,8 @@ generate/linux/divergence-single.diff
 libraries
 
 tests/aslts/tmp
-tests/misc/grammar.aml
-tests/misc/grammar.dsl
+tests/misc/*.dsl
+tests/misc/*.aml
 
 .pc
 
