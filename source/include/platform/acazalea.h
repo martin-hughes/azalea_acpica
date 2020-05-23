@@ -52,7 +52,7 @@
 #define ACPI_MUTEX_TYPE     ACPI_OSL_MUTEX
 
 #define ACPI_NO_ERROR_MESSAGES
-#undef ACPI_DEBUG_OUTPUT
+/*#undef ACPI_DEBUG_OUTPUT*/
 
 #ifdef __KERNEL__
 
@@ -77,10 +77,6 @@
 
 #ifdef CONFIG_ACPI_REDUCED_HARDWARE_ONLY
 #define ACPI_REDUCED_HARDWARE 1
-#endif
-
-#ifdef CONFIG_ACPI_DEBUGGER
-#define ACPI_DEBUGGER
 #endif
 
 #ifndef CONFIG_ACPI

@@ -5,8 +5,11 @@
 
 import os
 
+enable_debug_output = False
+
 def main_build_script(vars):
   global dependencies
+  global enable_debug_output
   lib_env = build_default_env()
 
   sys_image_root = vars["sys_image_root"]
@@ -16,14 +19,42 @@ def main_build_script(vars):
   lib_install_dir = os.path.join(sys_image_root, "apps", "developer", "acpica", "lib")
   header_install_dir = os.path.join(sys_image_root, "apps", "developer", "acpica", "include")
 
-  lib_env['CXXFLAGS'] = '-funwind-tables -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -std=c++17 -U _LINUX -U __linux__ -D __AZALEA__ -D __AZ_KERNEL__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
-  lib_env['CFLAGS'] = '-funwind-tables -nostdlib -nostdinc -nodefaultlibs -mcmodel=large -ffreestanding -fno-exceptions -U _LINUX -U __linux__ -D __AZALEA__ -D __AZ_KERNEL__ -Wno-bitwise-op-parentheses -Wno-shift-op-parentheses'
+  generic_flags = [
+    "-funwind-tables",
+    "-nostdlib",
+    "-nostdinc",
+    "-nodefaultlibs",
+    "-mcmodel=large",
+    "-ffreestanding",
+    "-fno-exceptions",
+    "-U _LINUX",
+    "-U __linux__",
+    "-D __AZALEA__",
+    "-D __AZ_KERNEL__",
+    "-Wno-bitwise-op-parentheses",
+    "-Wno-shift-op-parentheses",
+  ]
+
+  cxx_flags = [
+    "-nostdinc++",
+    "-std=c++17",
+  ]
+
+  debug_flags = [
+    "-D ACPI_DEBUG_OUTPUT",
+  ]
+
+  if enable_debug_output:
+    generic_flags = generic_flags + debug_flags
+
+  lib_env['CXXFLAGS'] = ' '.join(generic_flags + cxx_flags)
+  lib_env['CFLAGS'] = ' '.join(generic_flags)
   lib_env.AppendENVPath('CPATH', '#/source/include')
   lib_env.AppendENVPath('CPATH', '#/source/compiler')
   lib_env.AppendENVPath('CPATH', kernel_include_dir)
   lib_env.AppendENVPath('CPATH', libc_include_dir)
 
-  lib_obj = lib_env.SConscript("#SConscript", 'lib_env', variant_dir='output', duplicate=0)
+  lib_obj = lib_env.SConscript("#SConscript", ('lib_env', 'enable_debug_output'), variant_dir='output', duplicate=0)
   lib_env.Install(lib_install_dir, lib_obj)
   lib_env.Alias('install', lib_install_dir)
 
